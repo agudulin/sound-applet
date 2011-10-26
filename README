@@ -1,0 +1,11 @@
+Sound Applet
+============
+
+Indicator applet + volume changer
+
+Usage of volume.sh
+==================
+    * volume.sh up
+    * volume.sh down
+    * volume.sh mute
+
