@@ -8,16 +8,22 @@ import pynotify
 import os
 from amixer_parser import AmixerParser as amixer
 
-__path__ = os.getcwd()
+import dbus, gobject
+from dbus.mainloop.glib import DBusGMainLoop
 
 class SoundApplet(object):
     """SoundApplet class"""
-    def __init__(self, icon_name):
+    def __init__(self, control, icon_name):
+        self.control = control
         self.indicator = appindicator.Indicator("sound-applet", "indicator-messages", appindicator.CATEGORY_APPLICATION_STATUS)
         self.indicator.set_status(appindicator.STATUS_ACTIVE)
         self.indicator_icon = "audio-volume-" + icon_name + "-panel"
         self.indicator.set_attention_icon(self.indicator_icon)
         self.indicator.set_icon(self.indicator_icon)
+        
+        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+        bus = dbus.SystemBus()
+        bus.add_signal_receiver(self.change_icon, dbus_interface="com.sagod.SoundApplet", signal_name="current_volume")
         
         self.menu = gtk.Menu()
         
@@ -33,6 +39,13 @@ class SoundApplet(object):
         """Closes applet"""
         gtk.main_quit()
         
+    def change_icon(self, current_volume):
+        print ">> signal is here!"
+        print current_volume
+        self.indicator_icon = "audio-volume-" + self.control[current_volume] + "-panel"
+        self.indicator.set_attention_icon(self.indicator_icon)
+        self.indicator.set_icon(self.indicator_icon)
+        
         
 if __name__ == '__main__':
     control = []
@@ -45,8 +58,7 @@ if __name__ == '__main__':
     amixer = amixer()
     volume = amixer.get_volume()
     icon_name = control[volume]
-    #print volume, icon_name
     
-    indicator = SoundApplet(icon_name)
+    indicator = SoundApplet(control, icon_name)
     gtk.main()
 

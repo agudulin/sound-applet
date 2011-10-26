@@ -7,6 +7,7 @@ class AmixerParser():
     def get_volume(self):
         with open('/tmp/currentvolume', 'r') as f:
             self.current = int(f.read())
+
         return self.current
         
 if __name__ == "__main__":
