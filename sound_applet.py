@@ -40,8 +40,6 @@ class SoundApplet(object):
         gtk.main_quit()
         
     def change_icon(self, current_volume):
-        print ">> signal is here!"
-        print current_volume
         self.indicator_icon = "audio-volume-" + self.control[current_volume] + "-panel"
         self.indicator.set_attention_icon(self.indicator_icon)
         self.indicator.set_icon(self.indicator_icon)

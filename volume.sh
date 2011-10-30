@@ -29,4 +29,4 @@ else if [ "x$1" = "xmute" ]; then
     fi
 fi;fi;fi
 python /home/sagod/workspace/python/sound-applet/volume_changed.py $current 2>> /tmp/worklog
-mplayer /usr/share/sounds/ubuntu/stereo/bell.ogg
+#mplayer /usr/share/sounds/ubuntu/stereo/bell.ogg

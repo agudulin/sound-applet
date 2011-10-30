@@ -1,12 +1,16 @@
 #-*- coding: utf-8 -*-
 
+import os
+
 class AmixerParser():
     def __init__(self):
-        self.current = 0
+        self.current = 10
+        self.path = '/tmp/currentvolume'
         
     def get_volume(self):
-        with open('/tmp/currentvolume', 'r') as f:
-            self.current = int(f.read())
+        if os.path.exists(self.path) is True:
+            with open(self.path, 'r') as f:
+                self.current = int(f.read())
 
         return self.current
         
