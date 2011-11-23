@@ -4,6 +4,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 import sys
  
 class VolumeChanged(dbus.service.Object):
+
     def __init__(self, object_path):
         dbus_loop = DBusGMainLoop()
         bus = dbus.SystemBus(mainloop=dbus_loop)

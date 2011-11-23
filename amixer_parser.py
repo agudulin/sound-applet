@@ -3,12 +3,15 @@
 import os
 
 class AmixerParser():
+    """Get audio volume from temporary file
+        created by another shell script
+    """
     def __init__(self):
         self.current = 10
         self.path = '/tmp/currentvolume'
         
     def get_volume(self):
-        if os.path.exists(self.path) is True:
+        if os.path.exists(self.path):
             with open(self.path, 'r') as f:
                 self.current = int(f.read())
 
