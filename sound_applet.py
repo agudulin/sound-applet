@@ -46,9 +46,9 @@ class SoundApplet(object):
         
     def change_icon(self, current_volume):
         """Change icon according to audio volume changes"""
-        self.indicator_icon = "audio-volume-" +
-                              self.control[current_volume] +
-                              "-panel"
+        self.indicator_icon = "audio-volume-"\
+                              + self.control[current_volume]\
+                              + "-panel"
         self.indicator.set_attention_icon(self.indicator_icon)
         self.indicator.set_icon(self.indicator_icon)
 
